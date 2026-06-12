@@ -1,0 +1,13 @@
+# Configuración de despliegue en Render (Blueprint) — plan GRATIS
+# Los datos se guardan en una base PostgreSQL gratis (Neon), no en disco,
+# así el plan free de Render no los borra.
+services:
+  - type: web
+    name: repuestos-pedido
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        sync: false            # lo pegas tú al desplegar (la cadena de conexión de Neon)

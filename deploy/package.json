@@ -1,0 +1,16 @@
+{
+  "name": "repuestos-pedido",
+  "version": "1.0.0",
+  "description": "App de solicitudes y pedidos de repuestos al exterior — Grupo Platino (Distribuidora Platino). Sirve la app, hace de puente al API de SAP B1 y guarda datos compartidos.",
+  "main": "servidor.js",
+  "scripts": {
+    "start": "node servidor.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  },
+  "private": true
+}

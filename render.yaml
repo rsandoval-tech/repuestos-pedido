@@ -11,3 +11,5 @@ services:
     envVars:
       - key: DATABASE_URL
         sync: false            # lo pegas tú al desplegar (la cadena de conexión de Neon)
+      - key: APP_PASSWORD
+        sync: false            # la contraseña para entrar a la app (la defines tú en Render)

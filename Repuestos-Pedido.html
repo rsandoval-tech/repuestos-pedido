@@ -149,6 +149,69 @@
   .log-item{font-size:12px;padding:7px 0;border-bottom:1px dashed #e3e8ef}
   .log-item:last-child{border:none}.log-item .meta{color:var(--suave);font-size:11px}
   .solo-edicion{}
+  /* Spinner e indicadores de carga */
+  .spin{display:inline-block;width:16px;height:16px;border:2.5px solid rgba(37,99,235,.22);border-top-color:var(--azul);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .cargando{display:flex;align-items:center;gap:10px;color:var(--suave);font-size:13px;padding:16px 4px}
+  .carga-chip{position:fixed;bottom:24px;right:24px;background:var(--blanco);border:1px solid var(--borde);box-shadow:var(--sombra-lg);border-radius:12px;padding:12px 17px;display:none;align-items:center;gap:11px;font-size:13px;font-weight:600;z-index:150;color:var(--texto)}
+  .carga-chip.show{display:flex;animation:pop .25s}
+
+  /* Entrada escalonada de tarjetas KPI */
+  .kpi{opacity:0;animation:subir .5s cubic-bezier(.2,.7,.2,1) forwards}
+  .kpi:nth-child(1){animation-delay:.03s}.kpi:nth-child(2){animation-delay:.08s}.kpi:nth-child(3){animation-delay:.13s}
+  .kpi:nth-child(4){animation-delay:.18s}.kpi:nth-child(5){animation-delay:.23s}.kpi:nth-child(6){animation-delay:.28s}
+  .kpi:nth-child(7){animation-delay:.33s}.kpi:nth-child(8){animation-delay:.38s}
+  @keyframes subir{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .kpi .n{font-variant-numeric:tabular-nums}
+
+  /* Botón de tema */
+  .tema-btn{background:rgba(255,255,255,.16);border:none;color:#fff;width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .tema-btn:hover{background:rgba(255,255,255,.3)}
+
+  /* ===================== MODO OSCURO ===================== */
+  body.dark{--texto:#e6edf3;--suave:#94a3b8;--borde:#27313f;--fondo:#0b1017;--blanco:#151c26;--azul-claro:#17243a;
+    background:radial-gradient(1200px 500px at 100% -10%,#15213a 0,transparent 60%),radial-gradient(900px 500px at -10% 0,#0d2630 0,transparent 55%),#0b1017}
+  body.dark nav{background:rgba(17,23,31,.85);border-color:var(--borde)}
+  body.dark nav button{color:#94a3b8}
+  body.dark nav button:hover{background:#1b2433;color:#7eb0ff}
+  body.dark th{background:#172030;color:#94a3b8}
+  body.dark th,body.dark td{border-color:#222c39}
+  body.dark tbody tr:hover{background:#1b2433}
+  body.dark .tabla-wrap,body.dark .modal{background:var(--blanco)}
+  body.dark .lineas th{background:#172030}
+  body.dark .lineas td{border-color:#1c2632}
+  body.dark .fieldset{background:#121a24}
+  body.dark .modal-foot,body.dark .totales table{background:#172030}
+  body.dark .barra-bg{background:#222e40}
+  body.dark .btn-sec{background:#1b2330;color:#cbd5e1;border-color:#2b3748}
+  body.dark .btn-sec:hover{background:#222d3c;border-color:#3a4759}
+  body.dark .btn-mini{background:#161e29;border-color:#2b3748;color:#cbd5e1}
+  body.dark .btn-mini:hover{background:#1d2735}
+  body.dark input,body.dark select,body.dark textarea{background:#10161f;color:#e6edf3;border-color:#2a3444}
+  body.dark .log-box{background:#121a24}
+  body.dark .pill{background:#17243a;color:#93c5fd}
+  body.dark .badge.pend{background:#3a2e12;color:#fbbf24}body.dark .badge.conv{background:#0f3024;color:#34d399}
+  body.dark .vacio{color:#94a3b8}
+
+  /* Filas que entran en cascada al cambiar de pestaña */
+  @keyframes filaIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  tbody.entrar tr{animation:filaIn .35s both}
+  tbody.entrar tr:nth-child(1){animation-delay:.015s}tbody.entrar tr:nth-child(2){animation-delay:.04s}tbody.entrar tr:nth-child(3){animation-delay:.065s}tbody.entrar tr:nth-child(4){animation-delay:.09s}tbody.entrar tr:nth-child(5){animation-delay:.115s}tbody.entrar tr:nth-child(6){animation-delay:.14s}tbody.entrar tr:nth-child(7){animation-delay:.165s}tbody.entrar tr:nth-child(8){animation-delay:.19s}tbody.entrar tr:nth-child(9){animation-delay:.215s}tbody.entrar tr:nth-child(10){animation-delay:.24s}
+
+  /* Avisos (toast) con color según resultado */
+  .toast.ok{border-left:4px solid var(--verde)}
+  .toast.err{border-left:4px solid var(--rojo)}
+
+  /* Pedido atrasado: latido para llamar la atención */
+  .sem.rojo{animation:latido 1.9s ease-in-out infinite}
+  @keyframes latido{0%,100%{box-shadow:0 1px 2px rgba(0,0,0,.12),0 0 0 0 rgba(244,63,94,.5)}50%{box-shadow:0 1px 2px rgba(0,0,0,.12),0 0 0 5px rgba(244,63,94,0)}}
+
+  /* Respeta "reducir movimiento" del sistema */
+  @media (prefers-reduced-motion: reduce){
+    .kpi{opacity:1;animation:none}.vista.activa{animation:none}.spin{animation-duration:1.2s}
+    .barra-fill{transition:none}tbody.entrar tr{animation:none}.sem.rojo{animation:none}
+  }
+
   @media print{header,nav,.toolbar,.modal-bg,.no-print{display:none!important}.vista{display:block!important}body{background:#fff}.panel,.tabla-wrap{box-shadow:none;border:1px solid #ccc}}
 </style>
 </head>
@@ -161,6 +224,7 @@
     <div class="sub">Solicitudes y pedidos al exterior · Taller y Vendedores</div>
   </div>
   <div class="spacer"></div>
+  <button class="tema-btn" id="temaBtn" onclick="toggleTema()" title="Cambiar tema claro/oscuro">🌙</button>
   <span id="sapChip" class="chip off" title="Estado de conexión con SAP" onclick="irA('config')" style="cursor:pointer"><span class="dot"></span><span id="sapChipTxt">SAP desconectado</span></span>
   <div class="rol"><span>👤 Rol:</span>
     <select id="selRol" onchange="cambiarRol()">
@@ -174,6 +238,7 @@
   <button data-vista="solicitudes" onclick="irA('solicitudes')">📝 Solicitudes</button>
   <button data-vista="pedidos" onclick="irA('pedidos')">📦 Pedidos</button>
   <button data-vista="catalogo" onclick="irA('catalogo')">🔩 Catálogo</button>
+  <button data-vista="analisis" onclick="irA('analisis')">📈 Análisis</button>
   <button data-vista="config" onclick="irA('config')">⚙️ Configuración</button>
 </nav>
 
@@ -237,11 +302,44 @@
     </div>
     <p class="hint">Lista maestra de partes y precios. Al escribir el # de parte en un pedido, se autocompletan SAP, descripción, modelo y precio.</p>
     <div class="tabla-wrap"><table>
-      <thead><tr><th>SAP</th><th># Parte</th><th>Descripción</th><th>Modelo</th><th>Precio (USD)</th><th>Acciones</th></tr></thead>
+      <thead><tr><th>SAP</th><th># Parte</th><th>Descripción</th><th>Modelo</th><th>Costo base (L.)</th><th>Acciones</th></tr></thead>
       <tbody id="tbodyCat"></tbody></table></div>
     <div id="catNota" class="hint" style="margin:10px 2px 0"></div>
     <div id="vacioCat"></div>
     <div id="catSAP"></div>
+  </section>
+
+  <!-- ANALISIS -->
+  <section class="vista" id="vista-analisis">
+    <div class="toolbar">
+      <label class="btn btn-verde" style="display:inline-block">📥 Importar reporte (Excel/CSV)<input type="file" accept=".xlsx,.xls,.csv" onchange="importarAnalisis(event)" style="display:none"></label>
+      <input type="search" id="busAn" placeholder="Buscar código, parte, descripción…" oninput="renderAnalisis()">
+      <select id="fAnProp" onchange="renderAnalisis()"><option value="">Propiedad: Todas</option></select>
+      <select id="fAnModelo" onchange="renderAnalisis()"><option value="">Modelo: Todos</option></select>
+      <select id="fAnQ" onchange="renderAnalisis()"><option value="">Todos</option><option value="pedir">Solo con Cantidad a Pedir &gt; 0</option></select>
+      <button class="btn btn-pri solo-edicion" onclick="abrirGenerarPedido()">🧾 Generar pedido</button>
+      <div class="spacer" style="flex:1"></div>
+      <button class="btn btn-sec" onclick="exportAnalisisCSV()">⬇️ Excel (CSV)</button>
+    </div>
+    <div class="panel" style="padding:14px 18px;margin-bottom:16px">
+      <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-end">
+        <div class="campo"><label>Lead Time — LT (meses)</label><input id="anLT" type="number" min="0" step="0.1" style="width:120px" onchange="recalcAnalisis()"></div>
+        <div class="campo"><label>Periodo de revisión — T (meses)</label><input id="anT" type="number" min="0" step="0.1" style="width:130px" onchange="recalcAnalisis()"></div>
+        <div class="campo"><label>Nivel de servicio</label>
+          <select id="anZ" style="width:130px" onchange="recalcAnalisis()">
+            <option value="1.28">90%</option><option value="1.65">95%</option><option value="1.88">97%</option><option value="2.05">98%</option><option value="2.33">99%</option>
+          </select></div>
+        <div class="hint" style="flex:1;min-width:200px">Estos parámetros alimentan el inventario de seguridad, <b>Min</b>, <b>Max</b> y la <b>Cantidad a Pedir</b>. Ajusta y la tabla se recalcula sola.</div>
+      </div>
+    </div>
+    <div class="tabla-wrap"><table>
+      <thead><tr>
+        <th>Código SAP</th><th># Parte</th><th>Fabricante</th><th>Descripción</th><th>Propiedad</th><th>Modelo</th>
+        <th>Total Vtas</th><th>Prom/mes</th><th>Desv.Est.</th><th>Exist.</th><th>Tránsito</th>
+        <th>Min</th><th>Max</th><th>Rotación</th><th>Clasif.</th><th>Cant. a Pedir</th><th>Manual</th>
+      </tr></thead><tbody id="tbodyAn"></tbody></table></div>
+    <div id="vacioAn"></div>
+    <div id="notaAn" class="hint" style="margin:10px 2px"></div>
   </section>
 
   <!-- CONFIG -->
@@ -258,6 +356,10 @@
       <div class="campo" style="margin-bottom:14px">
         <label>Factor de descuento por defecto (ej. 0.8 = 20% desc.)</label>
         <input id="cfgFactor" type="number" min="0" max="1" step="0.01" placeholder="1"></div>
+      <div class="campo" style="margin-bottom:14px">
+        <label>Tipo de cambio (Lempiras por 1 USD)</label>
+        <input id="cfgTC" type="number" min="0" step="0.0001" placeholder="24.70">
+        <span class="hint">Se usa para mostrar el <b>costo base</b> del catálogo en Lempiras (el dato de SAP viene en USD).</span></div>
       <button class="btn btn-pri" onclick="guardarConfig()">Guardar configuración</button>
     </div>
     <div class="panel" style="max-width:660px">
@@ -283,6 +385,7 @@
       <label class="btn btn-sec" style="display:inline-block">📂 Restaurar<input type="file" accept=".json" onchange="importarJSON(event)" style="display:none"></label>
       <button class="btn btn-sec" onclick="cargarDemo()">🧪 Datos de ejemplo</button>
       <button class="btn btn-rojo" onclick="borrarTodo()">🗑️ Borrar todo</button>
+      <button class="btn btn-sec" onclick="cerrarSesionApp()">🔒 Cerrar sesión</button>
     </div>
   </section>
 </main>
@@ -309,6 +412,29 @@
     <div id="ocBody"></div>
   </div>
   <div class="modal-foot"><button class="btn btn-sec" onclick="cerrar('modalOC')">Cerrar</button></div>
+</div></div>
+
+<!-- MODAL GENERAR PEDIDO DESDE ANÁLISIS -->
+<div class="modal-bg" id="modalGen"><div class="modal" style="max-width:640px">
+  <div class="modal-head"><h3>🧾 Generar pedido desde el análisis</h3><button class="x" onclick="cerrar('modalGen')">×</button></div>
+  <div class="modal-body">
+    <div class="fgrid" style="grid-template-columns:1fr 1fr">
+      <div class="campo"><label>Tipo de pedido</label><select id="gTipo" onchange="calcCorr();previewGen()">
+        <option value="ST">ST · Stock terrestre</option><option value="SM">SM · Stock marítimo</option>
+        <option value="AC">AC · Aéreo courier</option><option value="ACC">ACC · Aéreo carga consolidada</option></select></div>
+      <div class="campo"><label>Marca / Fabricante</label><select id="gMarca" onchange="previewGen()"></select></div>
+      <div class="campo"><label>Año</label><input id="gAnio" type="number" min="2020" max="2099" onchange="calcCorr();previewGen()"></div>
+      <div class="campo"><label>Correlativo</label><input id="gCorr" type="number" min="1" onchange="previewGen()"></div>
+      <div class="campo"><label>Incoterm</label><select id="gIncoterm"><option>FOB</option><option>CIF</option><option>CIP</option><option>DAP</option><option>EXW</option></select></div>
+      <div class="campo"><label>Bodega proveedor (origen)</label><select id="gBodega"><option>Panamá</option><option>México</option><option>China</option><option>Singapur</option><option>Brasil</option><option>USA</option></select></div>
+      <div class="campo x2"><label>Proveedor</label><input id="gProv" list="dlProv" oninput="buscarProvSAP(this)"></div>
+    </div>
+    <div class="hint" id="gPreview" style="margin-top:8px;padding:12px 14px;background:var(--azul-claro);border-radius:8px"></div>
+  </div>
+  <div class="modal-foot">
+    <button class="btn btn-sec" onclick="cerrar('modalGen')">Cancelar</button>
+    <button class="btn btn-pri" onclick="generarPedidoDesdeAnalisis()">Crear pedido →</button>
+  </div>
 </div></div>
 
 <!-- MODAL CAMBIAR CONTRASEÑA -->
@@ -359,7 +485,7 @@
     <fieldset class="fieldset"><legend>Lo esencial</legend>
       <div class="fgrid">
         <div class="campo"><label>Proveedor</label><input id="p_proveedor" list="dlProv" oninput="buscarProvSAP(this)"></div>
-        <div class="campo"><label>Origen</label><select id="p_origen"><option>China</option><option>México</option><option>Panamá</option><option>Otro</option></select></div>
+        <div class="campo"><label>Origen</label><select id="p_origen"><option>China</option><option>México</option><option>Panamá</option><option>Singapur</option><option>Brasil</option><option>USA</option><option>Otro</option></select></div>
         <div class="campo"><label>¿Cuándo debe llegar?</label><input id="p_fechaProg" type="date"></div>
       </div>
     </fieldset>
@@ -424,7 +550,7 @@
       <div class="campo"><label># Parte <span class="req">*</span></label><input id="c_parte"></div>
       <div class="campo full"><label>Descripción</label><input id="c_desc"></div>
       <div class="campo"><label>Modelo</label><input id="c_modelo"></div>
-      <div class="campo"><label>Precio (USD)</label><input id="c_precio" class="num" type="number" min="0" step="0.01"></div>
+      <div class="campo"><label>Costo base (USD)</label><input id="c_precio" class="num" type="number" min="0" step="0.01" oninput="previewLps()"><span class="hint" id="c_precioLps"></span></div>
     </div>
   </div>
   <div class="modal-foot">
@@ -434,11 +560,12 @@
 </div></div>
 
 <div class="toast" id="toast"></div>
+<div class="carga-chip" id="cargaChip"><span class="spin"></span><span id="cargaTxt">Cargando…</span></div>
 
 <script src="lib/xlsx.full.min.js"></script>
 <script>
 /* ===================== DATOS BASE ===================== */
-const LS={sol:'rp_solicitudes_v2',ped:'rp_pedidos_v2',cat:'rp_catalogo_v2',cfg:'rp_config_v2'};
+const LS={sol:'rp_solicitudes_v2',ped:'rp_pedidos_v2',cat:'rp_catalogo_v2',an:'rp_analisis_v1',cfg:'rp_config_v2'};
 const MESES=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
 const CATALOGO_SEED=[
@@ -465,7 +592,8 @@ const CATALOGO_SEED=[
 let solicitudes=cargar(LS.sol,[]);
 let pedidos=cargar(LS.ped,[]);
 let catalogo=cargar(LS.cat,null); if(!catalogo){catalogo=CATALOGO_SEED.slice();guardarCat()}
-let cfg=cargar(LS.cfg,{isela:'',flete:0,factor:1});
+let cfg=cargar(LS.cfg,{isela:'',flete:0,factor:1,tc:24.7,lt:2,t:1,z:1.65});
+let analisis=cargar(LS.an,[]);
 let rol='Administrador';
 
 function cargar(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):def}catch(e){return def}}
@@ -473,12 +601,14 @@ function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){if(!lsSet._w){lsSet._
 function guardarSolic(){lsSet(LS.sol,JSON.stringify(solicitudes))}
 function guardarPedidos(){lsSet(LS.ped,JSON.stringify(pedidos))}
 function guardarCat(){lsSet(LS.cat,JSON.stringify(catalogo))}
+function guardarAn(){lsSet(LS.an,JSON.stringify(analisis))}
 function guardarCfg(){lsSet(LS.cfg,JSON.stringify(cfg))}
 
 /* ---- Almacén compartido (nube). Si el servidor responde, los datos son los mismos para todos. ---- */
 let NUBE=false;
 async function cargarTodo(){
   try{
+    mostrarCargando('Cargando datos compartidos…');
     const r=await fetch('/api/store'); if(!r.ok)throw 0;
     const d=await r.json();
     NUBE=true;
@@ -488,17 +618,20 @@ async function cargarTodo(){
       dbBulk('solicitudes',solicitudes,'replace');
       dbBulk('pedidos',pedidos,'replace');
       dbBulk('catalogo',catalogo,'replace');
+      dbBulk('analisis',analisis,'replace');
       dbCfg();
     } else {
       // Ya hay datos compartidos: esos mandan.
       solicitudes=Array.isArray(d.solicitudes)?d.solicitudes:[];
       pedidos=Array.isArray(d.pedidos)?d.pedidos:[];
       if(Array.isArray(d.catalogo)&&d.catalogo.length) catalogo=d.catalogo;
+      if(Array.isArray(d.analisis)) analisis=d.analisis;
       if(d.cfg&&typeof d.cfg==='object') cfg=Object.assign({},cfg,d.cfg);
-      guardarSolic();guardarPedidos();guardarCat();guardarCfg();
+      guardarSolic();guardarPedidos();guardarCat();guardarAn();guardarCfg();
     }
+    ocultarCargando();
     return true;
-  }catch(e){ NUBE=false; return false; }
+  }catch(e){ NUBE=false; ocultarCargando(); return false; }
 }
 function dbUpsert(coll,item){ if(NUBE) fetch('/api/upsert',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({coll,item})}).catch(()=>{}); }
 function dbDelete(coll,key){ if(NUBE) fetch('/api/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({coll,key})}).catch(()=>{}); }
@@ -506,8 +639,28 @@ function dbBulk(coll,items,mode){ if(NUBE) fetch('/api/bulk',{method:'POST',head
 function dbCfg(){ if(NUBE) fetch('/api/cfg',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cfg})}).catch(()=>{}); }
 
 /* ===================== UTILES ===================== */
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2600)}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.remove('ok','err');
+  if(/⚠️|error|inv[aá]lid|no se pudo|incorrect|no encontr/i.test(m))t.classList.add('err');
+  else if(/✓|guardad|cread|registrad|conectad|agregad|cambiada|elimin|borrad|restaurad|exportad|al d[ií]a|importad|reconect|vinculad/i.test(m))t.classList.add('ok');
+  t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2600)}
+function mostrarCargando(txt){const c=document.getElementById('cargaChip');if(!c)return;document.getElementById('cargaTxt').textContent=txt||'Cargando…';c.classList.add('show')}
+function ocultarCargando(){const c=document.getElementById('cargaChip');if(c)c.classList.remove('show')}
+function animateCount(el,finalStr){
+  if(typeof requestAnimationFrame!=='function'){el.textContent=finalStr;return;}
+  const m=String(finalStr).match(/^([^\d-]*)(-?[\d,]*\.?\d+)(.*)$/);
+  if(!m){el.textContent=finalStr;return;}
+  const pre=m[1],suf=m[3],numStr=m[2].replace(/,/g,''),target=parseFloat(numStr);
+  if(!isFinite(target)){el.textContent=finalStr;return;}
+  const dec=(numStr.split('.')[1]||'').length, dur=650, t0=(performance&&performance.now?performance.now():Date.now());
+  const fmt=v=>pre+v.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;
+  (function step(t){let p=Math.min(1,((t||Date.now())-t0)/dur);p=1-Math.pow(1-p,3);el.textContent=fmt(target*p);if(p<1)requestAnimationFrame(step);else el.textContent=finalStr;})(t0);
+}
+function animarBarras(el){const fills=el.querySelectorAll('.barra-fill');const go=()=>fills.forEach(f=>f.style.width=f.dataset.w||'0');if(typeof requestAnimationFrame==='function')requestAnimationFrame(go);else go();}
+function toggleTema(){const dark=document.body.classList.toggle('dark');try{localStorage.setItem('rp_tema',dark?'1':'0')}catch(e){}const b=document.getElementById('temaBtn');if(b)b.textContent=dark?'☀️':'🌙';}
+function aplicarTema(){let t='0';try{t=localStorage.getItem('rp_tema')}catch(e){}if(t==='1'){document.body.classList.add('dark');const b=document.getElementById('temaBtn');if(b)b.textContent='☀️';}}
 function usd(n){n=Number(n)||0;return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function tcambio(){return Number(cfg.tc)||24.7}
+function lps(n){return 'L. '+((Number(n)||0)*tcambio()).toLocaleString('es-HN',{minimumFractionDigits:2,maximumFractionDigits:2})}
 function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function trunc(s,n){s=String(s??'');return s.length>n?s.slice(0,n)+'…':s}
 function hoyD(){return new Date(new Date().toDateString())}
@@ -544,6 +697,13 @@ function irA(v){
   if(v==='solicitudes')renderSol();
   if(v==='pedidos')renderPed();
   if(v==='catalogo')renderCat();
+  if(v==='analisis')renderAnalisis();
+  animarFilas(v);
+}
+function animarFilas(v){
+  const id={solicitudes:'tbodySol',pedidos:'tbodyPed',catalogo:'tbodyCat',analisis:'tbodyAn'}[v];
+  if(!id)return; const tb=document.getElementById(id); if(!tb||!tb.children.length)return;
+  tb.classList.add('entrar'); setTimeout(()=>tb.classList.remove('entrar'),700);
 }
 function cambiarRol(){
   rol=document.getElementById('selRol').value;
@@ -569,6 +729,7 @@ function renderDash(){
     kpi(transito,'En tránsito','az')+kpi(venc,'Por vencer (≤7d)','a')+
     kpi(atras,'Atrasados','r')+kpi(recib,'Recibidos','v')+
     kpi(usd(monto),'Monto total','az')+kpi(prom+' días','Tiempo prom. entrega','v');
+  document.querySelectorAll('#kpis .n').forEach(el=>animateCount(el,el.textContent));
   barras('graf-origen',cuenta('origen'),tot);
   barras('graf-modalidad',cuenta('modalidad'),tot);
   barrasMonto('graf-mes',cuentaMonto());
@@ -584,11 +745,15 @@ function cuenta(campo){const m={};pedidos.forEach(p=>{const k=p[campo]||'—';m[
 function cuentaMonto(){const m={};pedidos.forEach(p=>{const k=p.mes||'—';m[k]=(m[k]||0)+totalPedido(p).total});return m}
 function barras(id,obj,total){
   const keys=Object.keys(obj).sort((a,b)=>obj[b]-obj[a]),max=Math.max(1,...Object.values(obj));
-  document.getElementById(id).innerHTML=keys.length?keys.map(k=>`<div class="barra-row"><span>${esc(k)}</span><div class="barra-bg"><div class="barra-fill" style="width:${obj[k]/max*100}%"></div></div><span class="val">${obj[k]} (${total?Math.round(obj[k]/total*100):0}%)</span></div>`).join(''):'<p class="hint">Sin datos.</p>';
+  const el=document.getElementById(id);
+  el.innerHTML=keys.length?keys.map(k=>`<div class="barra-row"><span>${esc(k)}</span><div class="barra-bg"><div class="barra-fill" data-w="${obj[k]/max*100}%" style="width:0"></div></div><span class="val">${obj[k]} (${total?Math.round(obj[k]/total*100):0}%)</span></div>`).join(''):'<p class="hint">Sin datos.</p>';
+  animarBarras(el);
 }
 function barrasMonto(id,obj){
   const keys=Object.keys(obj).sort((a,b)=>MESES.indexOf(a)-MESES.indexOf(b)),max=Math.max(1,...Object.values(obj));
-  document.getElementById(id).innerHTML=keys.length?keys.map(k=>`<div class="barra-row"><span>${esc(k)}</span><div class="barra-bg"><div class="barra-fill" style="width:${obj[k]/max*100}%"></div></div><span class="val">${usd(obj[k])}</span></div>`).join(''):'<p class="hint">Sin datos.</p>';
+  const el=document.getElementById(id);
+  el.innerHTML=keys.length?keys.map(k=>`<div class="barra-row"><span>${esc(k)}</span><div class="barra-bg"><div class="barra-fill" data-w="${obj[k]/max*100}%" style="width:0"></div></div><span class="val">${usd(obj[k])}</span></div>`).join(''):'<p class="hint">Sin datos.</p>';
+  animarBarras(el);
 }
 
 /* ===================== SOLICITUDES ===================== */
@@ -896,7 +1061,7 @@ function renderCat(){
   if(nota) nota.textContent = full.length>TOPE ? ('Mostrando '+TOPE+' de '+full.length.toLocaleString('es')+' partes — escribe en el buscador para encontrar una específica.') : (full.length+' parte(s) en tu catálogo.');
   tb.innerHTML=lista.map((c,i)=>`<tr>
     <td><span class="pill">${esc(c.sap||'—')}</span></td><td>${esc(c.parte)}</td><td>${esc(c.desc||'—')}</td>
-    <td>${esc(c.modelo||'—')}</td><td>${usd(c.precio)}</td>
+    <td>${esc(c.modelo||'—')}</td><td title="${usd(c.precio)} (costo de SAP en USD)">${lps(c.precio)}</td>
     <td class="acc">${c.sap?`<button class="btn-mini" title="Ver stock en SAP" onclick="verStockSAP('${esc(c.sap)}')">📦</button>`:''}<button class="btn-mini" onclick="abrirParte('${esc(c.parte)}')">${editable()?'✏️':'👁️'}</button>${editable()?`<button class="btn-mini del" onclick="borrarParte('${esc(c.parte)}')">🗑️</button>`:''}</td></tr>`).join('');
 }
 function refrescarDatalist(){document.getElementById('dlPartes').innerHTML=catalogo.map(c=>`<option value="${esc(c.parte)}">${esc(c.desc||'')}</option>`).join('')}
@@ -910,8 +1075,10 @@ function abrirParte(parte){
     document.getElementById('c_desc').value=c.desc||'';document.getElementById('c_modelo').value=c.modelo||'';
     document.getElementById('c_precio').value=c.precio||0;
   }else document.getElementById('tituloParte').textContent='Agregar parte';
+  previewLps();
   document.getElementById('modalParte').classList.add('abierto');
 }
+function previewLps(){const el=document.getElementById('c_precioLps');const v=document.getElementById('c_precio').value;el.textContent=v?('≈ '+lps(v)+'  (tipo de cambio '+tcambio()+')'):''}
 function guardarParte(){
   const parte=document.getElementById('c_parte').value.trim();if(!parte){document.getElementById('c_parte').classList.add('err');toast('El # de parte es obligatorio');return}
   document.getElementById('c_parte').classList.remove('err');
@@ -1050,7 +1217,7 @@ async function sincronizarCatalogoSAP(){
   const existe=new Set();
   catalogo.forEach(c=>{ if(c.sap)existe.add('s:'+c.sap.toLowerCase()); existe.add('p:'+c.parte.toLowerCase()); });
   let offset=0, lim=500, nuevas=0, vistos=0, pag=0;
-  toast('Actualizando desde SAP…');
+  mostrarCargando('Actualizando catálogo desde SAP…');
   try{
     while(pag++ < 60){
       const res=await sapItemsPage(lim,offset);
@@ -1061,13 +1228,14 @@ async function sincronizarCatalogoSAP(){
         catalogo.push({sap:it.itemCode||'',parte,desc:it.description||'',modelo:'',precio:it.price||0});
         existe.add(kP); if(kS)existe.add(kS); nuevas++;
       });
-      if(pag%4===0) toast('Actualizando… '+vistos.toLocaleString('es')+' revisadas, '+nuevas+' nuevas');
+      mostrarCargando('Revisadas '+vistos.toLocaleString('es')+' · '+nuevas+' nuevas');
       offset+=lim;
       if(data.length<lim) break;
     }
     guardarCat(); if(nuevas)dbBulk('catalogo',catalogo,'replace'); refrescarDatalist(); renderCat();
+    ocultarCargando();
     toast(nuevas ? ('✓ '+nuevas+' partes nuevas agregadas (las existentes no se tocaron)') : '✓ Todo al día: no hay partes nuevas');
-  }catch(err){ toast('Error al actualizar: '+err.message); }
+  }catch(err){ ocultarCargando(); toast('Error al actualizar: '+err.message); }
 }
 
 let _catT=null, _catSAPRes=[];
@@ -1080,14 +1248,14 @@ function buscarCatSAPdebounce(){
 }
 function buscarCatSAP(q){
   const cont=document.getElementById('catSAP'); if(!cont)return;
-  cont.innerHTML='<p class="hint">🔎 Buscando en SAP…</p>';
+  cont.innerHTML='<div class="cargando"><span class="spin"></span> Buscando en SAP…</div>';
   sapItems(q).then(res=>{
     const enLocal=new Set(); catalogo.forEach(c=>{ enLocal.add((c.sap||'').toLowerCase()); enLocal.add(c.parte.toLowerCase()); });
     _catSAPRes=(res.data||[]).filter(it=> !enLocal.has((it.itemCode||'').toLowerCase()) && !enLocal.has((it.partNumber||'').toLowerCase()));
     if(!_catSAPRes.length){ cont.innerHTML='<p class="hint">SAP: no hay resultados nuevos (ya están en tu catálogo o no existen).</p>'; return; }
     cont.innerHTML='<h2 style="font-size:14px;color:var(--azul);margin:20px 0 8px">🔌 Resultados en SAP — clic en ➕ para agregar a tu catálogo</h2>'+
-      '<div class="tabla-wrap"><table><thead><tr><th>SAP</th><th># Parte</th><th>Descripción</th><th>Precio</th><th></th></tr></thead><tbody>'+
-      _catSAPRes.map((it,i)=>`<tr><td><span class="pill">${esc(it.itemCode||'—')}</span></td><td>${esc(it.partNumber||'—')}</td><td>${esc(it.description||'')}</td><td>${it.price!=null?usd(it.price):'—'}</td><td><button class="btn-mini conv" onclick="agregarParteSAP(${i})">➕ Agregar</button></td></tr>`).join('')+
+      '<div class="tabla-wrap"><table><thead><tr><th>SAP</th><th># Parte</th><th>Descripción</th><th>Costo base (L.)</th><th></th></tr></thead><tbody>'+
+      _catSAPRes.map((it,i)=>`<tr><td><span class="pill">${esc(it.itemCode||'—')}</span></td><td>${esc(it.partNumber||'—')}</td><td>${esc(it.description||'')}</td><td title="${it.price!=null?usd(it.price):''}">${it.price!=null?lps(it.price):'—'}</td><td><button class="btn-mini conv" onclick="agregarParteSAP(${i})">➕ Agregar</button></td></tr>`).join('')+
       '</tbody></table></div>';
   }).catch(err=>{ cont.innerHTML='<p class="hint">⚠️ '+esc(err.message)+'</p>'; });
 }
@@ -1102,7 +1270,7 @@ function agregarParteSAP(i){
 function verStockSAP(code){
   const body=document.getElementById('stockBody');
   document.getElementById('stockTitulo').textContent='Existencias — '+code;
-  body.innerHTML='<p class="hint">Consultando SAP…</p>';
+  body.innerHTML='<div class="cargando"><span class="spin"></span> Consultando existencias en SAP…</div>';
   document.getElementById('modalStock').classList.add('abierto');
   sapStock(code).then(res=>{
     const d=res.data||[];
@@ -1137,7 +1305,7 @@ function buscarOC(){
   const body=document.getElementById('ocBody');
   let qs='status=all&limit=30';
   if(num) qs+='&docNum='+encodeURIComponent(num);
-  body.innerHTML='<p class="hint">Consultando SAP…</p>';
+  body.innerHTML='<div class="cargando"><span class="spin"></span> Buscando órdenes de compra en SAP…</div>';
   sapPOs(qs).then(res=>{
     let d=res.data||[];
     if(prov){ const pl=prov.toLowerCase(); d=d.filter(p=>(p.supplierName||'').toLowerCase().includes(pl)||(p.supplierCode||'').toLowerCase().includes(pl)); }
@@ -1156,8 +1324,193 @@ function usarOC(i){
   cerrar('modalOC'); toast('OC '+p.docNum+' vinculada al pedido ✓');
 }
 
+/* ===================== ANÁLISIS DE PEDIDO (reabastecimiento) ===================== */
+function importarAnalisis(e){
+  const f=e.target.files[0]; if(!f)return; e.target.value='';
+  if(typeof XLSX==='undefined'){ toast('No se cargó la librería de Excel.'); return; }
+  mostrarCargando('Leyendo reporte…');
+  const r=new FileReader();
+  r.onload=ev=>{ try{
+    const wb=XLSX.read(ev.target.result,{type:'array',raw:true});
+    const filas=analizarReporteWB(wb);
+    ocultarCargando();
+    if(!filas.length){ toast('⚠️ No encontré artículos. El reporte debe tener Código SAP y columnas "Mes 1, Mes 2, …".'); return; }
+    analisis=filas; recalcAnalisis();
+    toast('✓ '+filas.length+' artículos importados al análisis');
+  }catch(err){ ocultarCargando(); toast('No pude leer el reporte: '+err.message); } };
+  r.readAsArrayBuffer(f);
+}
+function mapAnHeader(row){
+  const map={}, meses=[]; let hits=0;
+  row.forEach((cell,i)=>{ const t=nrm(cell).toLowerCase(); if(!t)return;
+    if(/^mes\s*\.?\s*\d+/.test(t)){ meses.push(i); hits++; return; }
+    if(map.sap==null && /(c[oó]digo\s*sap|^sap\b|n[uú]mero de art|^art[ií]culo)/.test(t)){map.sap=i;hits++}
+    else if(map.parte==null && /(n[uú]mero de parte|#\s*parte|^parte$|c[oó]digo de barra|barra)/.test(t)){map.parte=i;hits++}
+    else if(map.fab==null && /fabricante/.test(t)){map.fab=i;hits++}
+    else if(map.desc==null && /descrip/.test(t)){map.desc=i;hits++}
+    else if(map.prop==null && /propiedad/.test(t)){map.prop=i;hits++}
+    else if(map.modelo==null && /^modelo$|modelo/.test(t)){map.modelo=i;hits++}
+    else if(map.exist==null && /existencia/.test(t)){map.exist=i;hits++}
+    else if(map.tran==null && /tr[aá]nsito/.test(t)){map.tran=i;hits++}
+  });
+  return (map.sap!=null && hits>=2) ? {map,meses} : null;
+}
+function analizarReporteWB(wb){
+  for(const name of wb.SheetNames){
+    const ws=wb.Sheets[name]; if(!ws)continue;
+    const rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:true,defval:''});
+    let hi=-1,map={},meses=[];
+    for(let r=0;r<rows.length;r++){ const mm=mapAnHeader(rows[r]); if(mm){ hi=r; map=mm.map; meses=mm.meses; break; } }
+    if(hi<0) continue;
+    const out=[]; let blancos=0;
+    for(let r=hi+1;r<rows.length;r++){ const row=rows[r];
+      const sap=nrm(row[map.sap]), parte=map.parte!=null?nrm(row[map.parte]):'';
+      if(!sap && !parte){ if(++blancos>8)break; continue; } blancos=0;
+      out.push({ sap: sap||parte, parte,
+        fabricante: map.fab!=null?nrm(row[map.fab]):'',
+        desc: map.desc!=null?nrm(row[map.desc]):'',
+        propiedad: map.prop!=null?nrm(row[map.prop]):'',
+        modelo: map.modelo!=null?nrm(row[map.modelo]):'',
+        meses: meses.map(ci=>numVal(row[ci])||0),
+        existencia: map.exist!=null?(numVal(row[map.exist])||0):0,
+        transito: map.tran!=null?(numVal(row[map.tran])||0):0,
+        manual: '' });
+    }
+    if(out.length) return out;
+  }
+  return [];
+}
+function statsFila(r){
+  const m=(r.meses||[]).map(x=>Number(x)||0), n=m.length||24;
+  const total=m.reduce((a,b)=>a+b,0), prom=total/n;
+  r.total=total; r.prom=prom;
+  r.desv=Math.sqrt(m.reduce((a,b)=>a+Math.pow(b-prom,2),0)/n);
+}
+function reordenFila(r,lt,t,z){
+  const ss=z*r.desv*Math.sqrt(Math.max(0,lt));      // inventario de seguridad
+  r.ss=ss;
+  r.min=r.prom*lt+ss;
+  r.max=r.prom*(t+lt)+ss;
+  const ex=Number(r.existencia)||0, tr=Number(r.transito)||0;
+  r.q=Math.max(0, Math.round(r.max-(ex+tr)));
+  r.rotacion=ex>0?(r.total/ex):0;
+}
+function clasificar(arr){
+  const ord=[...arr].sort((a,b)=>b.total-a.total);
+  const sum=ord.reduce((a,r)=>a+r.total,0)||1; let acc=0;
+  ord.forEach(r=>{ acc+=r.total; const p=acc/sum; r.abc = p<=0.8?'A':(p<=0.95?'B':'C'); });
+  arr.forEach(r=>{
+    const cv=r.prom>0?r.desv/r.prom:99;
+    r.xyz = cv<0.5?'X':(cv<1?'Y':'Z');
+    r.fsn = r.total<=0?'N':(r.rotacion>=6?'F':'S');
+    r.clasif=(r.abc||'C')+'-'+r.xyz+'-'+r.fsn;
+  });
+}
+function recalcAnalisis(){
+  const lt=Number(document.getElementById('anLT').value)||0;
+  const t=Number(document.getElementById('anT').value)||0;
+  const z=Number(document.getElementById('anZ').value)||1.65;
+  cfg.lt=lt; cfg.t=t; cfg.z=z; guardarCfg(); dbCfg();
+  analisis.forEach(r=>{ statsFila(r); reordenFila(r,lt,t,z); });
+  clasificar(analisis);
+  guardarAn(); dbBulk('analisis',analisis,'replace');
+  renderAnalisis();
+}
+function setManual(sap,v){ const r=analisis.find(x=>x.sap===sap); if(!r)return; r.manual=(v===''?'':Number(v)); guardarAn(); dbUpsert('analisis',r); }
+function renderAnalisis(){
+  llenar('fAnProp','Propiedad: Todas',[...new Set(analisis.map(r=>r.propiedad).filter(Boolean))]);
+  llenar('fAnModelo','Modelo: Todos',[...new Set(analisis.map(r=>r.modelo).filter(Boolean))]);
+  const q=(document.getElementById('busAn').value||'').toLowerCase();
+  const fp=val('fAnProp'), fm=val('fAnModelo'), fq=val('fAnQ');
+  const full=analisis.filter(r=>{
+    if(fp&&r.propiedad!==fp)return false; if(fm&&r.modelo!==fm)return false;
+    if(fq==='pedir'&&!(r.q>0))return false;
+    if(q){const t=[r.sap,r.parte,r.desc,r.fabricante].join(' ').toLowerCase(); if(!t.includes(q))return false}
+    return true;
+  });
+  const TOPE=400, lista=full.slice(0,TOPE);
+  const tb=document.getElementById('tbodyAn'), v=document.getElementById('vacioAn'), nota=document.getElementById('notaAn');
+  if(!full.length){ tb.innerHTML=''; if(nota)nota.textContent='';
+    v.innerHTML=`<div class="vacio"><div class="ic">📈</div><p>${analisis.length?'Ningún artículo coincide con los filtros.':'Aún no hay análisis. Usa <b>📥 Importar reporte</b> (Excel de SAP con ventas por mes) para empezar.'}</p></div>`; return; }
+  v.innerHTML='';
+  const num=x=>(Math.round((x||0)*100)/100).toLocaleString('es-HN');
+  if(nota) nota.textContent = (full.length>TOPE?('Mostrando '+TOPE+' de '+full.length+' — usa el buscador. · '):'')+full.filter(r=>r.q>0).length+' artículo(s) con cantidad a pedir.';
+  tb.innerHTML=lista.map(r=>`<tr>
+    <td><span class="pill">${esc(r.sap||'—')}</span></td><td>${esc(r.parte||'—')}</td><td>${esc(r.fabricante||'—')}</td>
+    <td title="${esc(r.desc)}">${esc(trunc(r.desc,28))}</td><td>${esc(r.propiedad||'—')}</td><td>${esc(r.modelo||'—')}</td>
+    <td>${num(r.total)}</td><td>${num(r.prom)}</td><td>${num(r.desv)}</td><td>${num(r.existencia)}</td><td>${num(r.transito)}</td>
+    <td>${num(r.min)}</td><td>${num(r.max)}</td><td>${num(r.rotacion)}</td><td><span class="pill">${esc(r.clasif||'—')}</span></td>
+    <td><b style="color:${r.q>0?'var(--rojo)':'var(--suave)'}">${num(r.q)}</b></td>
+    <td><input type="number" min="0" value="${(r.manual!==''&&r.manual!=null)?r.manual:''}" placeholder="${num(r.q)}" style="width:78px" onchange="setManual('${esc(r.sap)}',this.value)"></td>
+  </tr>`).join('');
+}
+function exportAnalisisCSV(){
+  if(!analisis.length){ toast('No hay análisis para exportar'); return; }
+  const nMeses=Math.max(0,...analisis.map(r=>(r.meses||[]).length));
+  const head=['Codigo SAP','# Parte','Fabricante','Descripcion','Propiedad','Modelo'];
+  for(let i=1;i<=nMeses;i++) head.push('Mes '+i);
+  head.push('Total Ventas','Venta Promedio','Desv Standard','Existencia','Transito','Min','Max','Rotacion','Clasificacion','Cantidad a Pedir','Cantidad Manual');
+  const rows=[head];
+  analisis.forEach(r=>{ const fila=[r.sap,r.parte,r.fabricante,r.desc,r.propiedad,r.modelo];
+    for(let i=0;i<nMeses;i++) fila.push((r.meses&&r.meses[i])||0);
+    fila.push(r.total||0,(r.prom||0).toFixed(2),(r.desv||0).toFixed(2),r.existencia||0,r.transito||0,(r.min||0).toFixed(2),(r.max||0).toFixed(2),(r.rotacion||0).toFixed(2),r.clasif||'',r.q||0,(r.manual!==''&&r.manual!=null)?r.manual:'');
+    rows.push(fila); });
+  bajarCSV(rows,'analisis_pedido.csv'); toast('Exportado ✓');
+}
+
+/* ----- Generar pedido desde el análisis (con nomenclatura) ----- */
+function effQty(r){ return (r.manual!==''&&r.manual!=null) ? (Number(r.manual)||0) : (Number(r.q)||0); }
+function filasAGenerar(marca){ return analisis.filter(r=> (!marca||r.fabricante===marca) && effQty(r)>0 ); }
+function abrirGenerarPedido(){
+  if(!analisis.length){ toast('Primero importa y calcula el análisis.'); return; }
+  const marcas=[...new Set(analisis.map(r=>r.fabricante).filter(Boolean))];
+  document.getElementById('gMarca').innerHTML = marcas.length ? marcas.map(m=>`<option>${esc(m)}</option>`).join('') : '<option value="">(todas)</option>';
+  document.getElementById('gTipo').value='AC';
+  document.getElementById('gAnio').value=new Date().getFullYear();
+  document.getElementById('gProv').value='';
+  calcCorr(); previewGen();
+  document.getElementById('modalGen').classList.add('abierto');
+}
+function calcCorr(){
+  const tipo=document.getElementById('gTipo').value, yy=String(Number(document.getElementById('gAnio').value)||new Date().getFullYear()).slice(-2);
+  const re=new RegExp('^'+tipo+'(\\d+)-'+yy,'i'); let max=0;
+  pedidos.forEach(p=>{ const m=re.exec(String(p.cot||'')); if(m) max=Math.max(max,parseInt(m[1])||0); });
+  document.getElementById('gCorr').value=max+1;
+}
+function numPedidoGen(){
+  const tipo=document.getElementById('gTipo').value, marca=document.getElementById('gMarca').value;
+  const yy=String(Number(document.getElementById('gAnio').value)||new Date().getFullYear()).slice(-2);
+  const corr=String(Number(document.getElementById('gCorr').value)||1).padStart(3,'0');
+  return tipo+corr+'-'+yy+marca;
+}
+function previewGen(){
+  const marca=document.getElementById('gMarca').value;
+  const rows=filasAGenerar(marca);
+  const totalQty=rows.reduce((a,r)=>a+effQty(r),0);
+  document.getElementById('gPreview').innerHTML = 'Nº de pedido: <b>'+esc(numPedidoGen())+'</b><br>'+
+    (rows.length ? (rows.length+' parte(s) a pedir · '+totalQty+' unidad(es) en total.') :
+    '<span style="color:var(--rojo)">No hay partes con cantidad a pedir para esta marca.</span>');
+}
+function generarPedidoDesdeAnalisis(){
+  const tipo=document.getElementById('gTipo').value, marca=document.getElementById('gMarca').value;
+  const rows=filasAGenerar(marca);
+  if(!rows.length){ toast('No hay partes con cantidad a pedir para esa marca.'); return; }
+  const cot=numPedidoGen();
+  const lineas=rows.map(r=>{ const c=catalogo.find(x=>(x.sap&&x.sap===r.sap)||x.parte.toLowerCase()===(r.parte||'').toLowerCase());
+    return { sap:r.sap||'', parte:r.parte||'', desc:r.desc||'', modelo:r.modelo||'', qty:effQty(r), precio:c?c.precio:0 }; });
+  cerrar('modalGen');
+  abrirPed(null,{lineas,proveedor:document.getElementById('gProv').value.trim()});
+  document.getElementById('p_cot').value=cot;
+  document.getElementById('p_origen').value=document.getElementById('gBodega').value;
+  document.getElementById('p_incoterm').value=document.getElementById('gIncoterm').value;
+  document.getElementById('p_modalidad').value=({ST:'Terrestre',SM:'Marítimo',AC:'Aéreo',ACC:'Aéreo'})[tipo]||'Marítimo';
+  syncMes(); recalcPed();
+  document.getElementById('pedAvanzado').style.display=''; document.getElementById('detTxt').textContent='▴ Menos detalles';
+  toast('Pedido '+cot+' armado — revisa y guarda');
+}
+
 /* ===================== CONFIG / DATOS ===================== */
-function guardarConfig(){cfg.isela=document.getElementById('cfgIsela').value.trim();cfg.flete=Number(document.getElementById('cfgFlete').value)||0;cfg.factor=Number(document.getElementById('cfgFactor').value)||1;guardarCfg();dbCfg();toast('Configuración guardada ✓')}
+function guardarConfig(){cfg.isela=document.getElementById('cfgIsela').value.trim();cfg.flete=Number(document.getElementById('cfgFlete').value)||0;cfg.factor=Number(document.getElementById('cfgFactor').value)||1;cfg.tc=Number(document.getElementById('cfgTC').value)||24.7;guardarCfg();dbCfg();renderCat();toast('Configuración guardada ✓')}
 function exportPedCSV(){
   if(!pedidos.length){toast('No hay pedidos');return}
   const rows=[['Cotización','Fecha','Mes','Proveedor','Origen','Modalidad','Incoterm','Item','SAP','# Parte','Descripción','Modelo','QTY','Precio HK','Total línea','Pago','Etapa','F.Programada','F.Real','Subtotal','Flete','Total pedido','Tracking']];
@@ -1165,11 +1518,12 @@ function exportPedCSV(){
     (p.lineas||[]).forEach((l,i)=>rows.push([p.cot,p.fecha,p.mes,p.proveedor,p.origen,p.modalidad,p.incoterm,i+1,l.sap,l.parte,l.desc,l.modelo,l.qty,l.precio,((l.precio||0)*factor*(l.qty||0)).toFixed(2),p.pago,p.etapa,p.fechaProg,p.fechaReal,t.sub.toFixed(2),t.flete.toFixed(2),t.total.toFixed(2),p.tracking]))});
   bajarCSV(rows,'pedidos_repuestos.csv');toast('Exportado ✓');
 }
-function exportCatCSV(){if(!catalogo.length){toast('Catálogo vacío');return}const rows=[['SAP','# Parte','Descripción','Modelo','Precio USD']];catalogo.forEach(c=>rows.push([c.sap,c.parte,c.desc,c.modelo,c.precio]));bajarCSV(rows,'catalogo_partes.csv');toast('Exportado ✓')}
+function exportCatCSV(){if(!catalogo.length){toast('Catálogo vacío');return}const tc=tcambio();const rows=[['SAP','# Parte','Descripción','Modelo','Costo base USD','Costo base L.','Tipo de cambio']];catalogo.forEach(c=>rows.push([c.sap,c.parte,c.desc,c.modelo,c.precio,((Number(c.precio)||0)*tc).toFixed(2),tc]));bajarCSV(rows,'catalogo_partes.csv');toast('Exportado ✓')}
 function bajarCSV(rows,nombre){const csv='﻿'+rows.map(r=>r.map(c=>'"'+String(c??'').replace(/"/g,'""')+'"').join(';')).join('\n');bajar(csv,nombre,'text/csv')}
-function exportarJSON(){bajar(JSON.stringify({solicitudes,pedidos,catalogo,cfg},null,2),'respaldo_repuestos.json','application/json');toast('Respaldo descargado ✓')}
-function importarJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.pedidos)pedidos=d.pedidos;if(d.solicitudes)solicitudes=d.solicitudes;if(d.catalogo)catalogo=d.catalogo;if(d.cfg)cfg=d.cfg;guardarSolic();guardarPedidos();guardarCat();guardarCfg();dbBulk('solicitudes',solicitudes,'replace');dbBulk('pedidos',pedidos,'replace');dbBulk('catalogo',catalogo,'replace');dbCfg();repintar();toast('Datos restaurados ✓')}catch(err){toast('Archivo inválido')}};r.readAsText(f);e.target.value=''}
+function exportarJSON(){bajar(JSON.stringify({solicitudes,pedidos,catalogo,analisis,cfg},null,2),'respaldo_repuestos.json','application/json');toast('Respaldo descargado ✓')}
+function importarJSON(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.pedidos)pedidos=d.pedidos;if(d.solicitudes)solicitudes=d.solicitudes;if(d.catalogo)catalogo=d.catalogo;if(d.analisis)analisis=d.analisis;if(d.cfg)cfg=d.cfg;guardarSolic();guardarPedidos();guardarCat();guardarAn();guardarCfg();dbBulk('solicitudes',solicitudes,'replace');dbBulk('pedidos',pedidos,'replace');dbBulk('catalogo',catalogo,'replace');dbBulk('analisis',analisis,'replace');dbCfg();repintar();toast('Datos restaurados ✓')}catch(err){toast('Archivo inválido')}};r.readAsText(f);e.target.value=''}
 function bajar(c,n,t){const b=new Blob([c],{type:t}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.click();URL.revokeObjectURL(u)}
+function cerrarSesionApp(){if(!confirm('¿Cerrar sesión? Tendrás que volver a ingresar la contraseña de acceso.'))return;fetch('/api/logout').then(()=>location.reload()).catch(()=>location.reload())}
 function borrarTodo(){if(!confirm('¿Borrar TODAS las solicitudes y pedidos? (el catálogo se conserva)'))return;solicitudes=[];pedidos=[];guardarSolic();guardarPedidos();dbBulk('solicitudes',[],'replace');dbBulk('pedidos',[],'replace');repintar();toast('Datos borrados')}
 
 function cargarDemo(){
@@ -1187,14 +1541,24 @@ function cargarDemo(){
 }
 
 /* ===================== INIT ===================== */
-function repintar(){ refrescarDatalist();renderDash();renderSol();renderPed();renderCat(); }
+function repintar(){ refrescarDatalist();renderDash();renderSol();renderPed();renderCat();renderAnalisis(); }
 function init(){
+  aplicarTema();
   document.getElementById('cfgIsela').value=cfg.isela||'';
   document.getElementById('cfgFlete').value=cfg.flete||0;
   document.getElementById('cfgFactor').value=cfg.factor||1;
-  refrescarDatalist();renderDash();renderSol();renderPed();renderCat();renderSapEstado();
+  document.getElementById('cfgTC').value=cfg.tc||24.7;
+  document.getElementById('anLT').value=cfg.lt!=null?cfg.lt:2;
+  document.getElementById('anT').value=cfg.t!=null?cfg.t:1;
+  document.getElementById('anZ').value=String(cfg.z||1.65);
+  refrescarDatalist();renderDash();renderSol();renderPed();renderCat();renderAnalisis();renderSapEstado();
   autoConectarSAP();
-  cargarTodo().then(okk=>{ if(okk){ refrescarDatalist();renderDash();renderSol();renderPed();renderCat(); } });
+  cargarTodo().then(okk=>{ if(okk){
+    document.getElementById('anLT').value=cfg.lt!=null?cfg.lt:2;
+    document.getElementById('anT').value=cfg.t!=null?cfg.t:1;
+    document.getElementById('anZ').value=String(cfg.z||1.65);
+    refrescarDatalist();renderDash();renderSol();renderPed();renderCat();renderAnalisis();
+  } });
 }
 init();
 </script>
